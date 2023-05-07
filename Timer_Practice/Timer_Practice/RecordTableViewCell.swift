@@ -45,12 +45,14 @@ class RecordTableViewCell: UITableViewCell {
         
         contentView.layer.borderWidth = 1
         
+        // timeLabel과 passPercentLabel을 VStack에 넣어줌
         let leftLabelView = UIStackView()
         leftLabelView.translatesAutoresizingMaskIntoConstraints = false
         leftLabelView.axis = .vertical
         leftLabelView.spacing = 5
         leftLabelView.distribution = .fillEqually
         contentView.addSubview(leftLabelView)
+        
         
         leftLabelView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
         leftLabelView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
@@ -59,7 +61,6 @@ class RecordTableViewCell: UITableViewCell {
         leftLabelView.addArrangedSubview(passPercentLabel)
         
         timeLabel.leadingAnchor.constraint(equalTo: leftLabelView.leadingAnchor).isActive = true
-        
         passPercentLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 10).isActive = true
         passPercentLabel.leadingAnchor.constraint(equalTo: leftLabelView.leadingAnchor).isActive = true
         
