@@ -51,7 +51,7 @@ class RecordTableViewCell: UITableViewCell {
         leftLabelView.axis = .vertical
         leftLabelView.spacing = 5
         leftLabelView.distribution = .fillEqually
-        contentView.addSubview(leftLabelView)
+        contentView.addSubview(leftLabelView) // Unable to activate constraint with anchors 오류 해결
         
         
         leftLabelView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true

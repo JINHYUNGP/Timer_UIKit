@@ -12,6 +12,9 @@
  고민 2. Cell이 겹쳐서 border가 두껍게 보인다..
  */
 
+// TODO: cell을 눌러 메모를 남길 수 있다.
+// TODO: 00:00:00가 되면 '타이머가 종료되었어요!'라는 Alert가 뜬다.
+
 import UIKit
 
 class CountDownViewController: UIViewController {
@@ -250,5 +253,18 @@ extension CountDownViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100 // 원하는 높이 값으로 대체
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let addVC = AddViewController()
+        let record = filteredList[indexPath.row]
+        
+        addVC.modalPresentationStyle = .fullScreen
+        addVC.timeLabel.text = record.time
+        addVC.passPercentLabel.text = record.percent
+        
+        present(addVC, animated: true)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

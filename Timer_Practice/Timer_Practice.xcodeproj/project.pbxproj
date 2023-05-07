@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C5DD69472A0782CA00A55756 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD69462A0782CA00A55756 /* RecordTableViewCell.swift */; };
 		C5DD694B2A07869E00A55756 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD694A2A07869E00A55756 /* Record.swift */; };
+		C5DD694D2A07CD3500A55756 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD694C2A07CD3500A55756 /* AddViewController.swift */; };
 		F32579792A028A74007ABDC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32579782A028A74007ABDC7 /* AppDelegate.swift */; };
 		F325797B2A028A74007ABDC7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F325797A2A028A74007ABDC7 /* SceneDelegate.swift */; };
 		F325797D2A028A74007ABDC7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F325797C2A028A74007ABDC7 /* ViewController.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		C5DD69462A0782CA00A55756 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		C5DD694A2A07869E00A55756 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		C5DD694C2A07CD3500A55756 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		F32579752A028A74007ABDC7 /* Timer_Practice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timer_Practice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32579782A028A74007ABDC7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F325797A2A028A74007ABDC7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			children = (
 				F325797C2A028A74007ABDC7 /* ViewController.swift */,
 				F32579A82A028F32007ABDC7 /* CountDownViewController.swift */,
+				C5DD694C2A07CD3500A55756 /* AddViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 			files = (
 				F32579A92A028F32007ABDC7 /* CountDownViewController.swift in Sources */,
 				F325797D2A028A74007ABDC7 /* ViewController.swift in Sources */,
+				C5DD694D2A07CD3500A55756 /* AddViewController.swift in Sources */,
 				C5DD694B2A07869E00A55756 /* Record.swift in Sources */,
 				F32579792A028A74007ABDC7 /* AppDelegate.swift in Sources */,
 				C5DD69472A0782CA00A55756 /* RecordTableViewCell.swift in Sources */,
