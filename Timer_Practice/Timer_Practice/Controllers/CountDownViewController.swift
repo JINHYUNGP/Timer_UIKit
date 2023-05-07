@@ -83,7 +83,7 @@ class CountDownViewController: UIViewController {
         button.setTitle("취소", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
-        button.addTarget(self, action: #selector(onPauseButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(onCancelButtonTapped), for: .touchUpInside)
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         button.widthAnchor.constraint(equalToConstant: 100).isActive = true
@@ -186,6 +186,10 @@ class CountDownViewController: UIViewController {
         } else {
             setTimeLabel()
         }
+    }
+    
+    @objc func onCancelButtonTapped() {
+        dismiss(animated: true)
     }
 
 }
