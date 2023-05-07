@@ -70,6 +70,7 @@ class ViewController: UIViewController {
         // MARK: FullScreen으로 모달 띄우기
         countDownVC.modalPresentationStyle = .fullScreen
         countDownVC.remainingTime = timePicker.countDownDuration
+        countDownVC.originTime = timePicker.countDownDuration
         present(countDownVC, animated: true)
     }
 }
