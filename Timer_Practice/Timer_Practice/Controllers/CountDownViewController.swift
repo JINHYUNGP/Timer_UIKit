@@ -27,7 +27,7 @@ class CountDownViewController: UIViewController {
         let label = UILabel()
         label.text = "시간이 임박했어요!"
         label.textColor = .red
-        label.alpha = 0.5
+        label.alpha = 0.0
         label.font = .systemFont(ofSize: 17, weight: .heavy)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -47,7 +47,7 @@ class CountDownViewController: UIViewController {
         progressView.progressTintColor = .tintColor
         progressView.trackTintColor = .gray
         progressView.progressViewStyle = .bar
-        progressView.setProgress(1 , animated: true)
+        progressView.setProgress(1.0 , animated: true)
         progressView.clipsToBounds = true
         progressView.layer.cornerRadius = 5
         progressView.clipsToBounds = true
@@ -186,6 +186,10 @@ class CountDownViewController: UIViewController {
         timeLabel.text = String(format: "%02d : %02d : %02d", minutes, seconds, milliseconds)
     }
     
+    func setProgressBar() {
+        progressBar.progress = Float(remainingTime / originTime)
+    }
+    
     @objc func onPauseButtonTapped() {
         if isPaused {
             stopTimer()
@@ -211,16 +215,19 @@ class CountDownViewController: UIViewController {
     @objc func updateTime() {
         remainingTime -= 0.01
         
+        setTimeLabel()
+        setProgressBar()
+        
         if remainingTime <= 0 {
-            timeLabel.text = "00 : 00 : 00"
+            let finishAlert = UIAlertController(title: "타이머가 종료되었어요!", message: "", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "종료", style: .cancel)
+            finishAlert.addAction(cancelAction)
+            present(finishAlert, animated: true, completion: nil)
             stopTimer()
         } else if remainingTime <= 10 {
             imminentLabel.alpha = 1.0
             timeLabel.textColor = .red
             progressBar.tintColor = .red
-            setTimeLabel()
-        } else {
-            setTimeLabel()
         }
     }
     
@@ -267,6 +274,7 @@ extension CountDownViewController: UITableViewDelegate, UITableViewDataSource {
         addVC.timeLabel.text = record.time
         addVC.passPercentLabel.text = record.percent
         addVC.index = indexPath.row
+        
         present(addVC, animated: true)
         // 선택된 셀 해제
         tableView.deselectRow(at: indexPath, animated: true)
