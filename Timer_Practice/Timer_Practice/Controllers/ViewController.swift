@@ -61,7 +61,6 @@ class ViewController: UIViewController {
         timePicker.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -margin).isActive = true
         
         startBtn.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: margin).isActive = true
-        startBtn.bottomAnchor.constraint(equalTo: stackView.bottomAnchor).isActive = true
         startBtn.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: margin).isActive = true
         startBtn.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -margin).isActive = true
     }

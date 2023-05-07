@@ -7,7 +7,7 @@
 
 /*
  고민 1. 타이머를 어떻게 화면 넘기자마자 시작시킬까?
- 
+        1-1. viewDidLoad()에서 startTimer() 하면 되긴 되는데 일시정지가 안먹힌다..;
  */
 
 import UIKit
@@ -16,11 +16,21 @@ class CountDownViewController: UIViewController {
     
     var remainingTime: TimeInterval = 0.0
     
+    var imminentLabel: UILabel = {
+        let label = UILabel()
+        label.text = "시간이 임박했어요!"
+        label.textColor = .red
+        label.alpha = 0.5
+        label.font = .systemFont(ofSize: 17, weight: .heavy)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "00 : 00:00"
-        label.font = .systemFont(ofSize: 50, weight: .bold)
+        label.text = "00 : 00 : 00"
+        label.font = .systemFont(ofSize: 42, weight: .heavy)
         return label
     }()
     
@@ -44,6 +54,7 @@ class CountDownViewController: UIViewController {
         button.backgroundColor = .lightGray
         button.setTitle("일시정지", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.addTarget(self, action: #selector(onPauseButtonTapped), for: .touchUpInside)
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -58,6 +69,7 @@ class CountDownViewController: UIViewController {
         button.backgroundColor = .systemYellow
         button.setTitle("기록", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.addTarget(self, action: #selector(onPauseButtonTapped), for: .touchUpInside)
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -70,6 +82,7 @@ class CountDownViewController: UIViewController {
         button.backgroundColor = .systemOrange
         button.setTitle("취소", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.addTarget(self, action: #selector(onPauseButtonTapped), for: .touchUpInside)
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -105,6 +118,7 @@ class CountDownViewController: UIViewController {
     
     func setUI(){
         view.backgroundColor = .white
+        view.addSubview(imminentLabel)
         view.addSubview(timeLabel)
         view.addSubview(progressBar)
         view.addSubview(buttonView)
@@ -116,11 +130,13 @@ class CountDownViewController: UIViewController {
     func setAutoLayOut(){
         let guide = view.safeAreaLayoutGuide
         let horizontalMargin: CGFloat = 20
-        let verticalMargin: CGFloat = 30
+        let verticalMargin: CGFloat = 40
         
-        timeLabel.topAnchor.constraint(equalTo: guide.topAnchor, constant: 100).isActive = true
+        imminentLabel.topAnchor.constraint(equalTo: guide.topAnchor, constant: 80).isActive = true
+        imminentLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        timeLabel.topAnchor.constraint(equalTo: imminentLabel.bottomAnchor, constant: verticalMargin).isActive = true
         timeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
         
         progressBar.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: verticalMargin).isActive = true
         progressBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -163,6 +179,7 @@ class CountDownViewController: UIViewController {
             timeLabel.text = "00 : 00 : 00"
             stopTimer()
         } else if remainingTime <= 10 {
+            imminentLabel.alpha = 1.0
             timeLabel.textColor = .red
             progressBar.tintColor = .red
             setTimeLabel()
