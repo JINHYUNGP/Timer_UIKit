@@ -68,10 +68,10 @@ class ViewController: UIViewController {
     
     @objc func onStartBtnTapped(){
         let countDownVC = CountDownViewController()
-        countDownVC.selectedTime = timePicker.date
+        // MARK: FullScreen으로 모달 띄우기
+        countDownVC.modalPresentationStyle = .fullScreen
+        countDownVC.remainingTime = timePicker.countDownDuration
         present(countDownVC, animated: true)
-        
     }
-
 }
 
