@@ -75,7 +75,7 @@ class AddViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         memoField.delegate = self
@@ -86,9 +86,11 @@ class AddViewController: UIViewController {
     private func setUI() {
         view.backgroundColor = .white
         view.addSubview(titleView)
+        
         titleView.addSubview(closeButton)
         titleView.addSubview(titleLabel)
         titleView.addSubview(saveButton)
+        
         view.addSubview(timeLabel)
         view.addSubview(passPercentLabel)
         view.addSubview(memoField)
@@ -133,17 +135,26 @@ class AddViewController: UIViewController {
     }
     
     @objc func isSaveButtonTapped() {
-        MyDB.dataList[index].memo = memoField.text
-        // 다시 돌아왔을때 reloadData를 어떻게 해주지.?
-        // viewWillAppear로 바로 해결..!
-        dismiss(animated: true)
+        let maxLength = 50
+        let fiftyAlert = UIAlertController(title: "50자 이내로 작성해주세요.", message: "", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        fiftyAlert.addAction(cancelAction)
+        
+        if memoField.text.count > maxLength {
+            present(fiftyAlert, animated: true, completion: nil)
+        } else {
+            MyDB.dataList[index].memo = memoField.text
+            // 다시 돌아왔을때 reloadData를 어떻게 해주지.?
+            // viewWillAppear로 바로 해결..!
+            dismiss(animated: true)
+        }
     }
 }
 
 extension AddViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-            updateCountLabel()
-        }
+        updateCountLabel()
+    }
     
     func updateCountLabel() {
         let maxLength = 50
