@@ -10,5 +10,5 @@ import Foundation
 struct Record {
     let time: String
     let percent: String
-    let memo: String
+    var memo: String
 }

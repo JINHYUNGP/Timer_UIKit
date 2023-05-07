@@ -9,6 +9,9 @@ import UIKit
 
 class AddViewController: UIViewController {
     
+    // 데이터 저장하기 위한 index
+    var index: Int = 0
+    
     var titleView : UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -75,6 +78,7 @@ class AddViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        memoField.delegate = self
         setUI()
         setConstraint()
     }
@@ -129,7 +133,26 @@ class AddViewController: UIViewController {
     }
     
     @objc func isSaveButtonTapped() {
-        
+        MyDB.dataList[index].memo = memoField.text
+        // 다시 돌아왔을때 reloadData를 어떻게 해주지.?
+        // viewWillAppear로 바로 해결..!
+        dismiss(animated: true)
     }
+}
 
+extension AddViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+            updateCountLabel()
+        }
+    
+    func updateCountLabel() {
+        let maxLength = 50
+        
+        textNumLabel.text = "\(memoField.text.count)/\(maxLength) 자"
+        
+        if memoField.text.count > maxLength {
+            memoField.textColor = .red
+            textNumLabel.textColor = .red
+        }
+    }
 }

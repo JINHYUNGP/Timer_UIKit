@@ -19,7 +19,7 @@ import UIKit
 
 class CountDownViewController: UIViewController {
     
-    var filteredList: [Record] = []
+//    var filteredList: [Record] = []
     var remainingTime: TimeInterval = 0.0
     var originTime: TimeInterval = 0.0
     
@@ -127,6 +127,10 @@ class CountDownViewController: UIViewController {
         setTimeLabel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        recordTableView.reloadData()
+    }
+    
     func setUI(){
         view.backgroundColor = .white
         
@@ -221,13 +225,13 @@ class CountDownViewController: UIViewController {
     }
     
     @objc func onRecordButtonTapped() {
-        filteredList.append(Record(time: timeLabel.text ?? "",
+        MyDB.dataList.append(Record(time: timeLabel.text ?? "",
                                    percent: String(format: "%.1f%% 경과",
                                                    100.0 - (Double(remainingTime) / Double(originTime)) * 100.0),
                                    memo: "추가 메모 없음"))
         // 셀이 위로 쌓이게끔 계속 정렬해준다.
         // (이 방법 말고도 스크롤을 위로 올려주는 방법이 있는데, 이게 더 간편함)
-        filteredList.sort(by: { $0.time < $1.time })
+        MyDB.dataList.sort(by: { $0.time < $1.time })
         recordTableView.reloadData()
     }
     
@@ -238,13 +242,13 @@ class CountDownViewController: UIViewController {
 
 extension CountDownViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredList.count
+        return MyDB.dataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecordTableViewCell.identifier, for: indexPath) as? RecordTableViewCell else { return UITableViewCell() }
         
-        let record = filteredList[indexPath.row]
+        let record = MyDB.dataList[indexPath.row]
         cell.timeLabel.text = record.time
         cell.passPercentLabel.text = record.percent
         cell.memoLabel.text = record.memo
@@ -257,14 +261,14 @@ extension CountDownViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let addVC = AddViewController()
-        let record = filteredList[indexPath.row]
+        let record = MyDB.dataList[indexPath.row]
         
         addVC.modalPresentationStyle = .fullScreen
         addVC.timeLabel.text = record.time
         addVC.passPercentLabel.text = record.percent
-        
+        addVC.index = indexPath.row
         present(addVC, animated: true)
-        
+        // 선택된 셀 해제
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

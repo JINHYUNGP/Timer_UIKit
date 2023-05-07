@@ -27,6 +27,7 @@ class RecordTableViewCell: UITableViewCell {
     var memoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -67,6 +68,7 @@ class RecordTableViewCell: UITableViewCell {
         contentView.addSubview(memoLabel)
         memoLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         memoLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+        memoLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
     }
 
 }
