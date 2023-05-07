@@ -8,6 +8,8 @@
 /*
  고민 1. 타이머를 어떻게 화면 넘기자마자 시작시킬까?
  1-1. viewDidLoad()에서 startTimer() 하면 되긴 되는데 일시정지가 안먹힌다..;
+ 
+ 고민 2. Cell이 겹쳐서 border가 두껍게 보인다..
  */
 
 import UIKit
@@ -120,11 +122,6 @@ class CountDownViewController: UIViewController {
         setUI()
         setAutoLayOut()
         setTimeLabel()
-        makeTestData()
-    }
-    
-    func makeTestData() {
-        filteredList.append(Record(time: "00 : 00 : 00", percent: "( 0.1% 경과 )", memo: "추가 메모 없음"))
     }
     
     func setUI(){
@@ -222,8 +219,12 @@ class CountDownViewController: UIViewController {
     
     @objc func onRecordButtonTapped() {
         filteredList.append(Record(time: timeLabel.text ?? "",
-                                   percent: String((Double(remainingTime) / Double(originTime)) * 100.0) + "%",
+                                   percent: String(format: "%.1f%% 경과",
+                                                   100.0 - (Double(remainingTime) / Double(originTime)) * 100.0),
                                    memo: "추가 메모 없음"))
+        // 셀이 위로 쌓이게끔 계속 정렬해준다.
+        // (이 방법 말고도 스크롤을 위로 올려주는 방법이 있는데, 이게 더 간편함)
+        filteredList.sort(by: { $0.time < $1.time })
         recordTableView.reloadData()
     }
     
