@@ -9,7 +9,7 @@ import UIKit
 
 class AddViewController: UIViewController {
     
-    // 데이터 저장하기 위한 index
+    // 데이터 저장하기 위한 선택 셀의 index
     var index: Int = 0
     
     var titleView : UIView = {

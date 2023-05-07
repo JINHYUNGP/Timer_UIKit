@@ -54,7 +54,6 @@ class RecordTableViewCell: UITableViewCell {
         leftLabelView.distribution = .fillEqually
         contentView.addSubview(leftLabelView) // Unable to activate constraint with anchors 오류 해결
         
-        
         leftLabelView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
         leftLabelView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
@@ -68,6 +67,7 @@ class RecordTableViewCell: UITableViewCell {
         contentView.addSubview(memoLabel)
         memoLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         memoLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+        // width 지정 안해주면 왼쪽으로 계속 넘침
         memoLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
     }
 

@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     let timePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .countDownTimer
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
         return datePicker
     }()
     
@@ -38,7 +39,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setUI()
         setAutoLayOut()
-        // Do any additional setup after loading the view.
     }
     
     func setUI(){
@@ -46,7 +46,6 @@ class ViewController: UIViewController {
         view.addSubview(stackView)
         stackView.addArrangedSubview(timePicker)
         stackView.addArrangedSubview(startBtn)
-        
     }
     
     func setAutoLayOut(){
@@ -56,7 +55,6 @@ class ViewController: UIViewController {
         stackView.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
         stackView.centerYAnchor.constraint(equalTo: guide.centerYAnchor).isActive = true
         
-        timePicker.topAnchor.constraint(equalTo: stackView.topAnchor).isActive = true
         timePicker.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: margin).isActive = true
         timePicker.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -margin).isActive = true
         
@@ -67,7 +65,7 @@ class ViewController: UIViewController {
     
     @objc func onStartBtnTapped(){
         let countDownVC = CountDownViewController()
-        // MARK: FullScreen으로 모달 띄우기
+        // FullScreen으로 모달 띄우기
         countDownVC.modalPresentationStyle = .fullScreen
         countDownVC.remainingTime = timePicker.countDownDuration
         countDownVC.originTime = timePicker.countDownDuration

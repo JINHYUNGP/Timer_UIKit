@@ -12,14 +12,10 @@
  고민 2. Cell이 겹쳐서 border가 두껍게 보인다..
  */
 
-// TODO: cell을 눌러 메모를 남길 수 있다.
-// TODO: 00:00:00가 되면 '타이머가 종료되었어요!'라는 Alert가 뜬다.
-
 import UIKit
 
 class CountDownViewController: UIViewController {
-    
-//    var filteredList: [Record] = []
+
     var remainingTime: TimeInterval = 0.0
     var originTime: TimeInterval = 0.0
     
@@ -176,7 +172,6 @@ class CountDownViewController: UIViewController {
         recordTableView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
         recordTableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
         recordTableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
-        
     }
     
     func setTimeLabel() {
