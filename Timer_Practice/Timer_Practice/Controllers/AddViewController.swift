@@ -58,7 +58,9 @@ class AddViewController: UIViewController {
         let textView = UITextView()
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.layer.cornerRadius = 10
+        textView.layer.cornerRadius = 20
+        // border과 너무 맞닿아 있을 때 추가해주기
+        textView.textContainerInset = .init(top: 10, left: 10, bottom: 10, right: 10)
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
@@ -91,7 +93,8 @@ class AddViewController: UIViewController {
     
     private func setConstraint() {
         let guide = view.safeAreaLayoutGuide
-        let horizontalMargin: CGFloat = 10
+        let horizontalMargin: CGFloat = 20
+        
         titleView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
         titleView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
         titleView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
@@ -115,7 +118,10 @@ class AddViewController: UIViewController {
         memoField.topAnchor.constraint(equalTo: passPercentLabel.bottomAnchor, constant: 100).isActive = true
         memoField.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: horizontalMargin).isActive = true
         memoField.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -horizontalMargin).isActive = true
-        memoField.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        memoField.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        
+        textNumLabel.topAnchor.constraint(equalTo: memoField.bottomAnchor, constant: 10).isActive = true
+        textNumLabel.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -horizontalMargin).isActive = true
     }
     
     @objc func isCloseButtonTapped() {
